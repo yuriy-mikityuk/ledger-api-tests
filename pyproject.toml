@@ -1,0 +1,28 @@
+[project]
+name = "ledger-api-tests"
+version = "0.1.0"
+description = "Mini-ledger fintech service and its API test suite"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[dependency-groups]
+service = [
+    "django>=5.2,<6",
+    "djangorestframework>=3.16,<3.17",
+    "drf-spectacular>=0.28,<0.30",
+    "psycopg[binary]>=3.2,<4",
+    "dj-database-url>=2.3,<4",
+    "gunicorn>=23,<24",
+]
+tests = [
+    "pytest>=8.3,<9",
+    "requests>=2.32,<3",
+    "psycopg[binary]>=3.2,<4",
+    "schemathesis>=3.39,<5",
+    "allure-pytest>=2.13,<3",
+]
+
+[tool.uv]
+package = false
+default-groups = ["service", "tests"]
