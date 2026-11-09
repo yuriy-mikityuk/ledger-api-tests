@@ -102,11 +102,9 @@ class QuoteCreateSerializer(serializers.Serializer):
             raise serializers.ValidationError(
                 {"to_wallet_id": ["Wallets must have different currencies."]}
             )
-        _require_currency_scale(attrs["amount"], from_wallet.currency)
-        if attrs["amount"] <= 0:
-            raise _amount_error("Amount must be greater than zero.")
-        if attrs["amount"] > money.MAX_STORABLE_AMOUNT:
-            raise _amount_error("Amount is too large.")
+        # Same limits as deposits: on tiny amounts ROUND_HALF_UP of amount_to outweighs
+        # the spread and a round trip becomes profitable.
+        _require_operation_limits(attrs["amount"], from_wallet.currency)
         attrs["from_wallet"] = from_wallet
         attrs["to_wallet"] = to_wallet
         return attrs
