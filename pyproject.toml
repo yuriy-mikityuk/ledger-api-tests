@@ -21,6 +21,7 @@ tests = [
     "psycopg[binary]>=3.2,<4",
     "schemathesis>=3.39,<5",
     "allure-pytest>=2.13,<3",
+    "pytest-dotenv>=0.5.2",
 ]
 
 [tool.uv]
